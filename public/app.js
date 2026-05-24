@@ -11,7 +11,7 @@ const state = {
 };
 
 const API_BASE = (window.location.protocol === 'file:' || !['3000', '3030'].includes(window.location.port))
-  ? 'http://localhost:3000'
+  ? 'http://localhost:3030'
   : '';
 
 async function apiRequest(path, options = {}) {

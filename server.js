@@ -389,30 +389,30 @@ app.post('/api/auth/login/fp', async (req, res) => {
 // -------------------- DEMO BANK PRESETS --------------------
 const DEMO_BANKS = [
   {
-    bankName: 'HDFC Bank',
+    bankName: 'Apex Bank',
     accountNumber: '4821000004821',
-    ifscCode: 'HDFC00004821',
+    ifscCode: 'APEX0004821',
     accountHolderName: 'FingerPay Demo',
     defaultBalance: 10000,
   },
   {
-    bankName: 'SBI',
+    bankName: 'Zenith Bank',
     accountNumber: '7734000007734',
-    ifscCode: 'SBIN00007734',
+    ifscCode: 'ZENI0007734',
     accountHolderName: 'FingerPay Demo',
     defaultBalance: 10000,
   },
   {
-    bankName: 'ICICI Bank',
+    bankName: 'Horizon Bank',
     accountNumber: '1052000001052',
-    ifscCode: 'ICIC00001052',
+    ifscCode: 'HORI0001052',
     accountHolderName: 'FingerPay Demo',
     defaultBalance: 10000,
   },
   {
-    bankName: 'Axis Bank',
+    bankName: 'Meridian Bank',
     accountNumber: '9106000009106',
-    ifscCode: 'UTIB00009106',
+    ifscCode: 'MERI0009106',
     accountHolderName: 'FingerPay Demo',
     defaultBalance: 10000,
   },
@@ -964,10 +964,38 @@ app.post('/api/wallet/offline-pay', authMiddleware, async (req, res) => {
 // ==================== START SERVER ====================
 const localIP = getLocalIP();
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', async () => {
   console.log('');
   console.log('🚀 FingerPay Server Running');
   console.log(`💻 Laptop → http://localhost:${PORT}`);
   console.log(`📱 Phone  → http://${localIP}:${PORT}`);
   console.log('');
+
+  // Auto-migrate any existing linked banks in DB using the old bank names
+  try {
+    const users = await User.find({ "linkedBanks.bankName": { $in: ["HDFC Bank", "SBI", "ICICI Bank", "Axis Bank"] } });
+    for (let user of users) {
+      user.linkedBanks.forEach(bank => {
+        if (bank.bankName === "HDFC Bank") {
+          bank.bankName = "Apex Bank";
+          if (bank.ifscCode === "HDFC00004821") bank.ifscCode = "APEX0004821";
+        } else if (bank.bankName === "SBI") {
+          bank.bankName = "Zenith Bank";
+          if (bank.ifscCode === "SBIN00007734") bank.ifscCode = "ZENI0007734";
+        } else if (bank.bankName === "ICICI Bank") {
+          bank.bankName = "Horizon Bank";
+          if (bank.ifscCode === "ICIC00001052") bank.ifscCode = "HORI0001052";
+        } else if (bank.bankName === "Axis Bank") {
+          bank.bankName = "Meridian Bank";
+          if (bank.ifscCode === "UTIB00009106") bank.ifscCode = "MERI0009106";
+        }
+      });
+      await user.save();
+    }
+    if (users.length > 0) {
+      console.log(`✅ Migrated bank names for ${users.length} user(s).`);
+    }
+  } catch (err) {
+    console.error("Migration error:", err);
+  }
 });

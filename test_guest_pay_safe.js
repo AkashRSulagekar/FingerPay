@@ -41,9 +41,9 @@ async function run() {
     walletBalance: 500,
     linkedBanks: [
       {
-        bankName: 'HDFC Bank',
+        bankName: 'Apex Bank',
         accountNumber: '111122223333',
-        ifscCode: 'HDFC0000123',
+        ifscCode: 'APEX0000123',
         accountHolderName: 'Guest Sender User',
         isPrimary: true,
         balance: 1000
