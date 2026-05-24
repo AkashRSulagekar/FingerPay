@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FingerPay – Pay With Your Touch</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<!-- ===== LANDING PAGE ===== -->
+<div id="page-landing" class="page active">
+  <nav class="navbar">
+    <div class="logo"><span class="logo-icon">◈</span> FingerPay</div>
+    <div class="nav-links">
+      <a href="#" onclick="showPage('page-login')">Login</a>
+      <a href="#" class="btn-primary" onclick="showPage('page-register')">Get Started</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="grid-lines"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">🔐 Next-Gen Biometric Payments</div>
+      <h1>Pay with the<br/><span class="gradient-text">touch of your finger</span></h1>
+      <p class="hero-sub">Secure, instant payments using your unique fingerprint. No card needed. No PIN to remember. Just you.</p>
+      <div class="hero-cta">
+        <button class="btn-primary btn-lg" onclick="showPage('page-register')">Create Free Account</button>
+        <button class="btn-ghost btn-lg" onclick="showPage('page-guest-pay')">Pay on Someone's Phone</button>
+      </div>
+      <div class="hero-features">
+        <div class="feat"><span>🫆</span> Fingerprint Auth</div>
+        <div class="feat"><span>📴</span> Offline Wallet</div>
+        <div class="feat"><span>📷</span> QR Payments</div>
+        <div class="feat"><span>📱</span> Phone Transfer</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone-mock">
+        <div class="phone-screen">
+          <div class="fp-ring">
+            <div class="fp-core">
+              <svg viewBox="0 0 100 100" class="fp-svg">
+                <path d="M50,15 C30,15 15,30 15,50 C15,70 30,85 50,85 C70,85 85,70 85,50 C85,30 70,15 50,15" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M50,25 C35,25 25,35 25,50 C25,65 35,75 50,75 C65,75 75,65 75,50 C75,35 65,25 50,25" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M50,35 C40,35 35,42 35,50 C35,58 40,65 50,65 C60,65 65,58 65,50 C65,42 60,35 50,35" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M42,45 C42,45 45,40 50,40 C55,40 58,45 58,50 C58,55 55,60 50,60" fill="none" stroke="currentColor" stroke-width="2"/>
+                <line x1="50" y1="15" x2="50" y2="85" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+              </svg>
+            </div>
+          </div>
+          <div class="phone-text">Touch to Pay</div>
+          <div class="phone-amount">₹ 1,250.00</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section">
+    <h2>Everything you need to pay smarter</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="fc-icon">🫆</div>
+        <h3>Biometric Identity</h3>
+        <p>Your fingerprint is your wallet. One fingerprint, one account — impossible to duplicate.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📱</div>
+        <h3>Pay on Any Phone</h3>
+        <p>Scan your fingerprint on a friend's phone. Choose your bank, enter secret code, done.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📴</div>
+        <h3>Offline Wallet</h3>
+        <p>Load money into your FingerPay wallet. Pay even when there's no internet connection.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">📷</div>
+        <h3>QR Code Payments</h3>
+        <p>Scan a merchant's QR, enter your 6-digit secret, and pay instantly from your account.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🔢</div>
+        <h3>Secret Code Security</h3>
+        <p>Every payment requires a 6-character alphanumeric secret code only you know.</p>
+      </div>
+      <div class="feature-card">
+        <div class="fc-icon">🏦</div>
+        <h3>Multi-Bank Support</h3>
+        <p>Link multiple bank accounts. Choose which one to pay from every time.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="logo"><span class="logo-icon">◈</span> FingerPay</div>
+    <p>Built for the future of payments. Final Year Project Demo.</p>
+  </footer>
+</div>
+
+<!-- ===== REGISTER PAGE ===== -->
+<div id="page-register" class="page">
+  <div class="auth-layout">
+    <div class="auth-left">
+      <div class="auth-brand" onclick="showPage('page-landing')" style="cursor:pointer">
+        <span class="logo-icon">◈</span> FingerPay
+      </div>
+      <h2>Create your account</h2>
+      <p>Join millions paying with just a touch</p>
+      <div class="auth-steps">
+        <div class="step active" id="step1-ind"><span>1</span> Personal Info</div>
+        <div class="step" id="step2-ind"><span>2</span> Fingerprint</div>
+        <div class="step" id="step3-ind"><span>3</span> Secret Code</div>
+      </div>
+    </div>
+    <div class="auth-right">
+      <!-- Step 1: Personal Info -->
+      <div class="reg-step active" id="reg-step1">
+        <h3>Personal Information</h3>
+        <p class="step-sub">Tell us who you are</p>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" placeholder="Arjun Sharma" />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="reg-email" placeholder="arjun@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="reg-phone" placeholder="+91 98765 43210" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="reg-password" placeholder="Strong password" />
+        </div>
+        <button class="btn-primary btn-full" onclick="goToStep(2)">Continue →</button>
+        <p class="auth-switch">Already have an account? <a href="#" onclick="showPage('page-login')">Login</a></p>
+      </div>
+
+      <!-- Step 2: Fingerprint -->
+      <div class="reg-step" id="reg-step2">
+        <h3>Register Your Fingerprint</h3>
+        <p class="step-sub">This fingerprint will be uniquely linked to your account</p>
+        <div class="fp-register-area" id="fp-register-area" onclick="simulateFingerprint()">
+          <div class="fp-scanner">
+            <div class="scan-ring"></div>
+            <svg viewBox="0 0 100 100" class="fp-svg-large">
+              <path d="M50,15 C30,15 15,30 15,50 C15,70 30,85 50,85 C70,85 85,70 85,50 C85,30 70,15 50,15" fill="none" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M50,25 C35,25 25,35 25,50 C25,65 35,75 50,75 C65,75 75,65 75,50 C75,35 65,25 50,25" fill="none" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M50,35 C40,35 35,42 35,50 C35,58 40,65 50,65 C60,65 65,58 65,50 C65,42 60,35 50,35" fill="none" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M42,45 C42,45 45,40 50,40 C55,40 58,45 58,50 C58,55 55,60 50,60" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <p id="fp-status-reg">Click / Tap to scan fingerprint</p>
+          <div class="fp-progress" id="fp-progress"><div class="fp-bar" id="fp-bar"></div></div>
+        </div>
+        <div class="fp-note">⚠️ Each fingerprint can only be linked to ONE account</div>
+        <div class="reg-nav">
+          <button class="btn-ghost" onclick="goToStep(1)">← Back</button>
+          <button class="btn-primary" id="fp-next-btn" disabled onclick="goToStep(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Secret Code -->
+      <div class="reg-step" id="reg-step3">
+        <h3>Set Your Secret Code</h3>
+        <p class="step-sub">6 characters — must include letters AND numbers (e.g. AB12CD)</p>
+        <div class="code-input-group">
+          <input class="code-box" maxlength="1" id="c0" oninput="moveCode(0)" />
+          <input class="code-box" maxlength="1" id="c1" oninput="moveCode(1)" />
+          <input class="code-box" maxlength="1" id="c2" oninput="moveCode(2)" />
+          <span class="code-sep">–</span>
+          <input class="code-box" maxlength="1" id="c3" oninput="moveCode(3)" />
+          <input class="code-box" maxlength="1" id="c4" oninput="moveCode(4)" />
+          <input class="code-box" maxlength="1" id="c5" oninput="moveCode(5)" />
+        </div>
+        <div class="code-rules">
+          <span id="rule-len" class="rule">✗ 6 characters</span>
+          <span id="rule-letter" class="rule">✗ Has letters</span>
+          <span id="rule-num" class="rule">✗ Has numbers</span>
+        </div>
+        <div class="form-group" style="margin-top:1.5rem">
+          <label>Confirm Secret Code</label>
+          <div class="code-input-group">
+            <input class="code-box" maxlength="1" id="cc0" oninput="moveConfirm(0)" />
+            <input class="code-box" maxlength="1" id="cc1" oninput="moveConfirm(1)" />
+            <input class="code-box" maxlength="1" id="cc2" oninput="moveConfirm(2)" />
+            <span class="code-sep">–</span>
+            <input class="code-box" maxlength="1" id="cc3" oninput="moveConfirm(3)" />
+            <input class="code-box" maxlength="1" id="cc4" oninput="moveConfirm(4)" />
+            <input class="code-box" maxlength="1" id="cc5" oninput="moveConfirm(5)" />
+          </div>
+        </div>
+        <div class="reg-nav">
+          <button class="btn-ghost" onclick="goToStep(2)">← Back</button>
+          <button class="btn-primary" onclick="completeRegistration()">Create Account 🎉</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LOGIN PAGE ===== -->
+<div id="page-login" class="page">
+  <div class="auth-layout">
+    <div class="auth-left">
+      <div class="auth-brand" onclick="showPage('page-landing')" style="cursor:pointer">
+        <span class="logo-icon">◈</span> FingerPay
+      </div>
+      <h2>Welcome back</h2>
+      <p>Login with your credentials or fingerprint</p>
+    </div>
+    <div class="auth-right">
+      <h3>Login to FingerPay</h3>
+      <p class="step-sub">Use your email/phone or fingerprint</p>
+      <div class="login-tabs">
+        <button class="tab-btn active" onclick="switchLoginTab('creds')">Password</button>
+        <button class="tab-btn" onclick="switchLoginTab('fp')">Fingerprint</button>
+      </div>
+      <div id="login-creds">
+        <div class="form-group">
+          <label>Email or Phone</label>
+          <input type="text" id="login-identifier" placeholder="arjun@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="Your password" />
+        </div>
+        <button class="btn-primary btn-full" onclick="loginUser()">Login →</button>
+      </div>
+      <div id="login-fp" style="display:none">
+        <div class="fp-register-area" onclick="loginWithFP()">
+          <div class="fp-scanner">
+            <div class="scan-ring"></div>
+            <svg viewBox="0 0 100 100" class="fp-svg-large">
+              <path d="M50,15 C30,15 15,30 15,50 C15,70 30,85 50,85 C70,85 85,70 85,50 C85,30 70,15 50,15" fill="none" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M50,25 C35,25 25,35 25,50 C25,65 35,75 50,75 C65,75 75,65 75,50 C75,35 65,25 50,25" fill="none" stroke="currentColor" stroke-width="2.5"/>
+              <path d="M50,35 C40,35 35,42 35,50 C35,58 40,65 50,65 C60,65 65,58 65,50 C65,42 60,35 50,35" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <p>Tap to login with fingerprint</p>
+        </div>
+      </div>
+      <p class="auth-switch">No account? <a href="#" onclick="showPage('page-register')">Register here</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="page-dashboard" class="page">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><span class="logo-icon">◈</span> FingerPay</div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" onclick="showDash('home')"><span>🏠</span> Dashboard</a>
+        <a href="#" class="nav-item" onclick="showDash('pay-qr')"><span>📷</span> Pay via QR</a>
+        <a href="#" class="nav-item" onclick="showDash('pay-phone')"><span>📞</span> Pay to Number</a>
+        <a href="#" class="nav-item" onclick="showDash('wallet')"><span>👛</span> Offline Wallet</a>
+        <a href="#" class="nav-item" onclick="showDash('bank')"><span>🏦</span> Bank Accounts</a>
+        <a href="#" class="nav-item" onclick="showDash('history')"><span>📋</span> History</a>
+        <a href="#" class="nav-item" onclick="showPage('page-guest-pay')"><span>📱</span> Guest Pay</a>
+      </nav>
+      <div class="sidebar-user">
+        <div class="user-avatar">AS</div>
+        <div class="user-info">
+          <div class="user-name" id="dash-username">Arjun Sharma</div>
+          <div class="user-status">● Online</div>
+          <div class="user-id" id="dash-fpuserid" style="font-size: 0.7rem; color: var(--accent); margin-top: 2px;">FP-XXXXXX</div>
+        </div>
+        <button class="logout-btn" onclick="logoutUser()">⎋</button>
+      </div>
+    </aside>
+
+    <main class="dash-main">
+      <!-- HOME -->
+      <div class="dash-section active" id="dash-home">
+        <div class="dash-header">
+          <h2>Good morning, <span id="greet-name">Arjun</span> 👋</h2>
+          <p>Here's your financial overview</p>
+        </div>
+        <div class="balance-cards">
+          <div class="balance-card primary">
+            <div class="bc-label" id="dash-bank-label">Bank Balance</div>
+            <div class="bc-amount" id="tb-amount">₹ 0.00</div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; gap: 8px; position: relative; z-index: 10;">
+              <span class="bc-sub" id="dash-bank-sub" style="font-size: 0.75rem; color: var(--text2);">Default Account</span>
+              <select id="dash-bank-selector" onchange="switchDashBankBalance(this.value)" style="background: rgba(0,0,0,0.4); border: 1px solid rgba(0,229,255,0.3); color: #fff; border-radius: 50px; padding: 2px 10px; font-size: 0.75rem; outline: none; cursor: pointer;">
+                <option value="">No Bank Linked</option>
+              </select>
+            </div>
+            <div class="bc-deco">🏦</div>
+          </div>
+          <div class="balance-card secondary">
+            <div class="bc-label">Wallet Balance</div>
+            <div class="bc-amount" id="wc-static-amount">₹ 0.00</div>
+            <div class="bc-sub">Offline ready</div>
+            <div class="bc-deco">👛</div>
+          </div>
+          <div class="balance-card accent">
+            <div class="bc-label">This Month</div>
+            <div class="bc-amount">₹ 8,420.00</div>
+            <div class="bc-sub">Total spent</div>
+            <div class="bc-deco">📊</div>
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <h3>Quick Actions</h3>
+          <div class="qa-grid">
+            <button class="qa-btn" onclick="showDash('pay-qr')">📷<span>Scan QR</span></button>
+            <button class="qa-btn" onclick="showDash('pay-phone')">📞<span>Pay Number</span></button>
+            <button class="qa-btn" onclick="showDash('wallet')">👛<span>Add to Wallet</span></button>
+            <button class="qa-btn" onclick="showPage('page-guest-pay')">📱<span>Guest Pay</span></button>
+          </div>
+        </div>
+
+        <div class="recent-tx">
+          <h3>Recent Transactions</h3>
+          <div class="tx-list" id="tx-list">
+            <div class="tx-item"><div class="tx-icon">🛒</div><div class="tx-info"><b>Amazon Purchase</b><span>May 1, 2026</span></div><div class="tx-amt debit">–₹340</div></div>
+            <div class="tx-item"><div class="tx-icon">📞</div><div class="tx-info"><b>Transfer to Priya</b><span>Apr 30</span></div><div class="tx-amt debit">–₹500</div></div>
+            <div class="tx-item"><div class="tx-icon">👛</div><div class="tx-info"><b>Wallet Top-up</b><span>Apr 29</span></div><div class="tx-amt credit">+₹1,000</div></div>
+            <div class="tx-item"><div class="tx-icon">📷</div><div class="tx-info"><b>QR – Cafe Coffee Day</b><span>Apr 28</span></div><div class="tx-amt debit">–₹185</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAY VIA QR -->
+      <div class="dash-section" id="dash-pay-qr">
+        <div class="dash-header"><h2>📷 Pay via QR Code</h2><p>Scan a merchant or friend's QR code</p></div>
+        <div class="pay-flow">
+          <div class="qr-scan-area" id="qr-scan-box" onclick="simulateQRScan()">
+            <div class="qr-frame">
+              <div class="qr-corner tl"></div><div class="qr-corner tr"></div>
+              <div class="qr-corner bl"></div><div class="qr-corner br"></div>
+              <div class="qr-line"></div>
+            </div>
+            <p>Tap to simulate QR scan</p>
+          </div>
+          <div class="pay-form" id="qr-pay-form" style="display:none">
+            <div class="merchant-info">
+              <div class="merchant-icon">🏪</div>
+              <div><b id="qr-merchant">Cafe Coffee Day</b><br/><span id="qr-mid">MID: 9982341</span></div>
+            </div>
+            <div class="form-group"><label>Amount (₹)</label><input type="number" id="qr-amount" placeholder="Enter amount" /></div>
+            <div class="form-group">
+              <label>Pay From</label>
+              <select id="qr-bank">
+                <option value="" disabled selected>Choose payment source...</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Secret Code (6 chars)</label>
+              <div class="code-input-group mini">
+                <input class="code-box sm" maxlength="1" id="qc0" oninput="movePay('qc',0,6)"/>
+                <input class="code-box sm" maxlength="1" id="qc1" oninput="movePay('qc',1,6)"/>
+                <input class="code-box sm" maxlength="1" id="qc2" oninput="movePay('qc',2,6)"/>
+                <span class="code-sep">–</span>
+                <input class="code-box sm" maxlength="1" id="qc3" oninput="movePay('qc',3,6)"/>
+                <input class="code-box sm" maxlength="1" id="qc4" oninput="movePay('qc',4,6)"/>
+                <input class="code-box sm" maxlength="1" id="qc5" oninput="movePay('qc',5,6)"/>
+              </div>
+            </div>
+            <button class="btn-primary btn-full" onclick="processPayment('QR')">Pay Now 🫆</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAY TO PHONE NUMBER -->
+      <div class="dash-section" id="dash-pay-phone">
+        <div class="dash-header"><h2>📞 Pay to Phone Number</h2><p>Send money directly to a mobile number</p></div>
+        <div class="pay-form centered">
+          <div class="form-group">
+            <label>Recipient's Phone Number</label>
+            <input type="tel" id="p2p-phone" placeholder="+91 98765 43210" oninput="lookupPhone()" />
+          </div>
+          <div class="recipient-found" id="recipient-card" style="display:none">
+            <div class="rec-avatar">PS</div>
+            <div class="rec-info"><b>Priya Singh</b><span>FingerPay User ✓</span></div>
+          </div>
+          <div class="form-group"><label>Amount (₹)</label><input type="number" id="p2p-amount" placeholder="0.00" /></div>
+          <div class="form-group">
+            <label>Pay From</label>
+            <select id="p2p-bank">
+              <option value="" disabled selected>Choose bank account...</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Note (optional)</label><input type="text" id="p2p-note" placeholder="Dinner split, rent..." /></div>
+          <div class="form-group"><label>Secret Code</label>
+            <div class="code-input-group mini">
+              <input class="code-box sm" maxlength="1" id="pc0" oninput="movePay('pc',0,6)"/>
+              <input class="code-box sm" maxlength="1" id="pc1" oninput="movePay('pc',1,6)"/>
+              <input class="code-box sm" maxlength="1" id="pc2" oninput="movePay('pc',2,6)"/>
+              <span class="code-sep">–</span>
+              <input class="code-box sm" maxlength="1" id="pc3" oninput="movePay('pc',3,6)"/>
+              <input class="code-box sm" maxlength="1" id="pc4" oninput="movePay('pc',4,6)"/>
+              <input class="code-box sm" maxlength="1" id="pc5" oninput="movePay('pc',5,6)"/>
+            </div>
+          </div>
+          <button class="btn-primary btn-full" onclick="processPayment('Phone')">Send Money →</button>
+        </div>
+      </div>
+
+      <!-- OFFLINE WALLET -->
+      <div class="dash-section" id="dash-wallet">
+        <div class="dash-header"><h2>👛 Offline Wallet</h2><p>Pre-load money to pay without internet</p></div>
+        <div class="wallet-card">
+          <div class="wc-bg"></div>
+          <div class="wc-content">
+            <div class="wc-label">Wallet Balance</div>
+            <div class="wc-amount">₹ 1,200.00</div>
+            <div class="wc-status"><span class="status-dot offline"></span> Offline Ready</div>
+          </div>
+        </div>
+        <div class="wallet-actions">
+          <div class="pay-form">
+            <h3>Add Money to Wallet</h3>
+            <div class="amount-chips">
+              <button class="chip" onclick="setWalletAmt(500)">+₹500</button>
+              <button class="chip" onclick="setWalletAmt(1000)">+₹1,000</button>
+              <button class="chip" onclick="setWalletAmt(2000)">+₹2,000</button>
+              <button class="chip" onclick="setWalletAmt(5000)">+₹5,000</button>
+            </div>
+            <div class="form-group"><label>Or enter amount</label><input type="number" id="wallet-add-amt" placeholder="Enter amount" /></div>
+            <div class="form-group">
+              <label>From Bank Account</label>
+              <select id="wallet-bank">
+                <option value="">Select bank</option>
+              </select>
+            </div>
+            <button class="btn-primary btn-full" onclick="addToWallet()">Add to Wallet</button>
+          </div>
+          <div class="offline-pay-area">
+            <h3>Offline Payment</h3>
+            <div class="offline-badge">📴 Works without internet</div>
+            <div class="form-group">
+              <label>Recipient Phone</label>
+              <input type="tel" id="offline-recipient" placeholder="+91 phone number" oninput="lookupOfflinePhone()" />
+            </div>
+            
+            <!-- Recipient Lookup Result Container -->
+            <div class="recipient-found" id="offline-recipient-card" style="display:none; margin-bottom: 1.25rem;">
+              <div class="rec-avatar" id="offline-rec-avatar">??</div>
+              <div class="rec-info">
+                <b id="offline-rec-name">Account Holder</b>
+                <span id="offline-rec-status">FingerPay User ✓</span>
+              </div>
+            </div>
+            <div id="offline-rec-error" style="color: var(--danger); font-size: 0.85rem; margin-bottom: 1.25rem; display: none;">No account found</div>
+
+            <div class="form-group"><label>Amount (₹)</label><input type="number" id="offline-amt" placeholder="0.00" /></div>
+            <div class="form-group"><label>Secret Code</label>
+              <div class="code-input-group mini">
+                <input class="code-box sm" maxlength="1" id="oc0" oninput="movePay('oc',0,6)"/>
+                <input class="code-box sm" maxlength="1" id="oc1" oninput="movePay('oc',1,6)"/>
+                <input class="code-box sm" maxlength="1" id="oc2" oninput="movePay('oc',2,6)"/>
+                <span class="code-sep">–</span>
+                <input class="code-box sm" maxlength="1" id="oc3" oninput="movePay('oc',3,6)"/>
+                <input class="code-box sm" maxlength="1" id="oc4" oninput="movePay('oc',4,6)"/>
+                <input class="code-box sm" maxlength="1" id="oc5" oninput="movePay('oc',5,6)"/>
+              </div>
+            </div>
+            <button class="btn-primary btn-full" onclick="processPayment('Offline')">Pay Offline 📴</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BANK ACCOUNTS -->
+      <div class="dash-section" id="dash-bank">
+        <div class="dash-header"><h2>🏦 Linked Bank Accounts</h2><p>Manage your connected bank accounts</p></div>
+        <div class="bank-list">
+          <div class="bank-card">
+            <div class="bank-logo">HDFC</div>
+            <div class="bank-info">
+              <b>HDFC Bank – Savings Account</b>
+              <span>Account: ****4821</span>
+              <span>Balance: ₹18,450</span>
+            </div>
+            <div class="bank-badge primary">Primary</div>
+          </div>
+          <div class="bank-card">
+            <div class="bank-logo">SBI</div>
+            <div class="bank-info">
+              <b>State Bank of India – Current</b>
+              <span>Account: ****7734</span>
+              <span>Balance: ₹5,200</span>
+            </div>
+            <div class="bank-badge">Linked</div>
+          </div>
+          <button class="add-bank-btn" onclick="showModal('modal-add-bank')">+ Link New Bank Account</button>
+        </div>
+      </div>
+
+      <!-- TRANSACTION HISTORY -->
+      <div class="dash-section" id="dash-history">
+        <div class="dash-header"><h2>📋 Transaction History</h2><p>All your payments in one place</p></div>
+        <div class="filter-bar">
+          <button class="filter-btn active">All</button>
+          <button class="filter-btn">Sent</button>
+          <button class="filter-btn">Received</button>
+          <button class="filter-btn">QR</button>
+          <button class="filter-btn">Offline</button>
+        </div>
+        <div class="full-tx-list" id="full-tx-list">
+          <div class="tx-item"><div class="tx-icon">🛒</div><div class="tx-info"><b>Amazon Purchase</b><span>QR Payment • May 1, 2026</span></div><div class="tx-amt debit">–₹340</div></div>
+          <div class="tx-item"><div class="tx-icon">📞</div><div class="tx-info"><b>Transfer to Priya Singh</b><span>Phone • Apr 30</span></div><div class="tx-amt debit">–₹500</div></div>
+          <div class="tx-item"><div class="tx-icon">👛</div><div class="tx-info"><b>Wallet Top-up</b><span>Wallet • Apr 29</span></div><div class="tx-amt credit">+₹1,000</div></div>
+          <div class="tx-item"><div class="tx-icon">📷</div><div class="tx-info"><b>Cafe Coffee Day</b><span>QR • Apr 28</span></div><div class="tx-amt debit">–₹185</div></div>
+          <div class="tx-item"><div class="tx-icon">📴</div><div class="tx-info"><b>Offline – Ravi Store</b><span>Offline Wallet • Apr 27</span></div><div class="tx-amt debit">–₹250</div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ===== GUEST PAY PAGE (Pay on someone else's phone) ===== -->
+<div id="page-guest-pay" class="page">
+  <div class="guest-layout">
+    <div class="guest-header">
+      <button class="back-btn" onclick="guestBack()">← Back</button>
+      <div class="logo"><span class="logo-icon">◈</span> FingerPay</div>
+      <div></div>
+    </div>
+    <div class="guest-content">
+      <h2>Pay on This Phone</h2>
+      <p class="guest-sub">Identify your account using your passkey</p>
+
+      <!-- Step 1: Passkey Entry -->
+      <div class="guest-step active" id="gs-step1">
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Enter Guest Passkey</label>
+          <input type="password" id="gs-passkey" placeholder="Enter alphanumeric passkey" style="margin-top: 0.5rem;" />
+        </div>
+        <button class="btn-primary btn-full" onclick="submitGuestPasskey()">Identify Account 🫆</button>
+        <div class="guest-note">🔒 Enter the guest's passkey to fetch their accounts and authorize payment.</div>
+      </div>
+
+        <!-- Step 2: Choose Account -->
+      <div class="guest-step" id="gs-step2">
+        <div class="gs-found"><div class="gs-avatar">AS</div><b id="gs-verified-name">Guest</b><span>Fingerprint verified ✓</span></div>
+        <h3 style="margin:1.5rem 0 1rem">Choose Payment Account</h3>
+        <div class="account-options" id="account-options">
+          <!-- Filled dynamically from /api/guest/linked-banks -->
+          <div class="tx-item"><div class="tx-info"><b>Loading...</b><span>Reading banks from DB</span></div></div>
+        </div>
+        <div class="form-group" style="margin-top:1.5rem"><label>Amount (₹)</label><input type="number" id="gs-amount" placeholder="0.00"/></div>
+        <button class="btn-primary btn-full" onclick="guestGoToCode()">Continue →</button>
+      </div>
+
+
+      <!-- Step 3: Secret Code -->
+      <div class="guest-step" id="gs-step3">
+        <div class="gs-summary" id="gs-summary">Paying ₹<span id="gs-sum-amt">–</span> from <span id="gs-sum-acc">–</span></div>
+        <h3>Enter Your Secret Code</h3>
+        <p class="step-sub">Only you know this code</p>
+        <div class="code-input-group">
+          <input class="code-box" maxlength="1" id="gc0" oninput="movePay('gc',0,6)"/>
+          <input class="code-box" maxlength="1" id="gc1" oninput="movePay('gc',1,6)"/>
+          <input class="code-box" maxlength="1" id="gc2" oninput="movePay('gc',2,6)"/>
+          <span class="code-sep">–</span>
+          <input class="code-box" maxlength="1" id="gc3" oninput="movePay('gc',3,6)"/>
+          <input class="code-box" maxlength="1" id="gc4" oninput="movePay('gc',4,6)"/>
+          <input class="code-box" maxlength="1" id="gc5" oninput="movePay('gc',5,6)"/>
+        </div>
+        <button class="btn-primary btn-full" style="margin-top:2rem" onclick="processGuestPayment()">Confirm Payment 🫆</button>
+        <button class="btn-ghost btn-full" onclick="gotoGuestStep(2)">← Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PASSKEY MODAL ===== -->
+<div class="modal-overlay" id="modal-passkey">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3 id="passkey-title">Create Passkey</h3>
+    <p id="passkey-message" style="margin-bottom: 1.5rem;"></p>
+    
+    <div class="form-group" style="text-align: left; margin-bottom: 1.5rem;">
+      <input type="password" id="passkey-input" placeholder="Enter alphanumeric passkey" autocomplete="off" />
+      <div id="passkey-error" style="color: var(--danger); font-size: 0.85rem; margin-top: 0.5rem; display: none;"></div>
+    </div>
+    
+    <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1.5rem;">
+      <button class="btn-ghost" id="passkey-cancel-btn" style="flex: 1; padding: 0.75rem 1rem;">Cancel</button>
+      <button class="btn-primary" id="passkey-save-btn" style="flex: 1; padding: 0.75rem 1rem;">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SUCCESS MODAL ===== -->
+<div class="modal-overlay" id="modal-success" onclick="closeModal('modal-success')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="success-anim">
+      <div class="check-circle">✓</div>
+    </div>
+    <h3>Payment Successful!</h3>
+    <p id="success-msg">Your payment has been processed.</p>
+    <div class="success-details" id="success-details"></div>
+    <button class="btn-primary" onclick="closeModal('modal-success')">Done</button>
+  </div>
+</div>
+
+<!-- ===== ADD BANK MODAL ===== -->
+<div class="modal-overlay" id="modal-add-bank" onclick="closeModal('modal-add-bank')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>Link Bank Account</h3>
+    <div class="modal-tabs">
+      <button class="modal-tab-btn active" id="btn-tab-demo" onclick="switchModalTab('demo')">Demo Presets</button>
+      <button class="modal-tab-btn" id="btn-tab-manual" onclick="switchModalTab('manual')">Manual Link</button>
+    </div>
+    
+    <!-- Tab 1: Demo Presets -->
+    <div class="modal-tab-content active" id="modal-tab-demo">
+      <p style="font-size: 0.85rem; margin-bottom: 1rem;">Select one of our simulated demo banks to link instantly with test balances.</p>
+      <div class="demo-banks-grid" id="demo-banks-list">
+        <div style="grid-column: span 2; text-align: center; color: var(--text2); font-size: 0.85rem; padding: 1rem 0;">Loading demo banks...</div>
+      </div>
+    </div>
+    
+    <!-- Tab 2: Manual Link -->
+    <div class="modal-tab-content" id="modal-tab-manual">
+      <div class="form-group"><label>Bank Name</label>
+        <select id="bank-name"><option>HDFC Bank</option><option>SBI</option><option>ICICI</option><option>Axis Bank</option><option>Kotak</option></select>
+      </div>
+      <div class="form-group"><label>Account Number</label><input type="text" id="bank-account-number" placeholder="Leave blank to auto-generate"/></div>
+      <div class="form-group"><label>IFSC Code</label><input type="text" id="bank-ifsc" placeholder="Leave blank to auto-generate"/></div>
+      <div class="form-group"><label>Account Holder Name</label><input type="text" id="bank-holder-name" placeholder="Leave blank to use your name"/></div>
+      <button class="btn-primary btn-full" onclick="linkBankAccount()">Link Account</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+
+<script src="app.js"></script>
+</body>
+</html>
