@@ -10,9 +10,7 @@ const state = {
   webAuthnCredentialId: localStorage.getItem('fp_credentialId') || null,
 };
 
-const API_BASE = (window.location.protocol === 'file:' || !['3000', '3030'].includes(window.location.port))
-  ? 'http://localhost:3030'
-  : '';
+const API_BASE = '';
 
 async function apiRequest(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
