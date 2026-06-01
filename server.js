@@ -43,9 +43,17 @@ function getLocalIP() {
 }
 
 // ==================== CONNECT MONGODB ====================
-mongoose.connect(MONGO_URI)
+
+console.log("MONGO_URI =", MONGO_URI);
+
+mongoose.connect(MONGO_URI, {
+  serverSelectionTimeoutMS: 30000
+})
   .then(() => console.log('✅ MongoDB connected'))
-  .catch((err) => console.error('❌ MongoDB error:', err));
+  .catch((err) => {
+    console.error('❌ MongoDB error:', err);
+    console.error('URI Used:', MONGO_URI);
+  });
 
 // ==================== SCHEMAS ====================
 const BankSchema = new mongoose.Schema({

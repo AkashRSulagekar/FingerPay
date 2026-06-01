@@ -14,8 +14,8 @@
     "dotenv": "^16.6.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "mongodb": "^7.2.0",
     "mongoose": "^7.4.0",
-
     "selfsigned": "^2.4.1"
   },
   "devDependencies": {
